@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.project.sunnyweather.MainActivity
 import com.project.sunnyweather.R
 import com.project.sunnyweather.WeatherActivity
 import kotlinx.android.synthetic.main.fragment_place.*
@@ -32,7 +33,8 @@ class PlaceFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val layoutManager = LinearLayoutManager(activity)
-        if (viewModel.isPlaceSaved()){
+        if (activity is MainActivity && viewModel.isPlaceSaved()){
+            //避免陷入无限循环
             val place = viewModel.getSavedPlace()
             val intent = Intent(context,WeatherActivity::class.java).apply {
                 putExtra("location_lng",place.location.lng)

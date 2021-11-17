@@ -8,6 +8,7 @@ import com.project.sunnyweather.logic.model.Place
 
 object PlaceDao {
     fun savePlace(place : Place){
+        //实现存储信息
         sharedPreferences().edit {
             putString("place",Gson().toJson(place))
         }
